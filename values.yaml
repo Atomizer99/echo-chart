@@ -55,6 +55,10 @@ mongodb:
   service:
     name: mongodb
 
+certificate:
+  name: echo-certificate
+  secretname: cert-secret
+  
 
 
 # nginx-ingress-controller:
