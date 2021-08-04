@@ -10,14 +10,14 @@ helm install \
 
 
 
-hochart-mongodb-0.echochart-mongodb-headless.default.svc.cluster.local
-hochart-mongodb-1.echochart-mongodb-headless.default.svc.cluster.local
+echohochart-mongodb-0.echochart-mongodb-headless.default.svc.cluster.local
+echohochart-mongodb-1.echochart-mongodb-headless.default.svc.cluster.local
 
 
-export MONGODB_ROOT_PASSWORD=$(kubectl get secret --namespace default my-database-mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
-export MONGODB_PASSWORD=$(kubectl get secret --namespace default my-database-mongodb -o jsonpath="{.data.mongodb-password}" | base64 --decode)
+export MONGODB_ROOT_PASSWORD=$(kubectl get secret --namespace default echochart-mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+export MONGODB_PASSWORD=$(kubectl get secret --namespace default echochart-mongodb -o jsonpath="{.data.mongodb-password}" | base64 --decode)
 
-    kubectl run --namespace default my-database-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.7-debian-10-r9 --command -- bash
-    mongo admin --host "hochart-mongodb-0.echochart-mongodb-headless.default.svc.cluster.local:27017,hochart-mongodb-1.echochart-mongodb-headless.default.svc.cluster.local:27017" --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD
+kubectl run --namespace default my-database-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.7-debian-10-r9 --command -- bash
+mongo admin --host "echochart-mongodb-0.echochart-mongodb-headless.default.svc.cluster.local,echochart-mongodb-1.echochart-mongodb-headless.default.svc.cluster.local:27017" --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD
 
 
