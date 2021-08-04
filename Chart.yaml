@@ -12,6 +12,6 @@ dependencies:
   - name: nginx-ingress-controller
     version: "7.6.17"
     repository: "https://charts.bitnami.com/bitnami"
-  - name: cert-manager
-    version: "1.4.1"
-    repository: "https://charts.jetstack.io"
+  # - name: cert-manager
+  #   version: "1.4.1"
+  #   repository: "https://charts.jetstack.io"

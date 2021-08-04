@@ -33,15 +33,16 @@ service:
   
 clusterIssuer:
   name: letsencrypt
-  namespace: cert-manager
+  #namespace: cert-manager
   email: "eli.kaplan70@gmail.com"
   server: 'https://acme-v02.api.letsencrypt.org/directory'
   keyname: echo-issuer-account-key
   
 ingress:
+  keyname: yoloswaggins
   name: echo-ingress
 #  namespace: default
-  host: kanye.ga
+  host: aezakmi.ga
 mongodb:
   #usePassword: true
   name: mongodb
