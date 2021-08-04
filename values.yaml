@@ -1,0 +1,62 @@
+app:
+  name: echoappv4-deploy
+  labels:
+    app: echoapp
+    version: v4
+  replicaCount: 2
+  container:
+    name: echoappv4
+    image: gcr.io/echo-project-320612/echo
+    port: 3000
+    tag: v1.1
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "128Mi"
+    cpu: "450m"
+
+mongoSecret:
+  name: mongodb-secret
+  #url: bW9uZ29kYjovL3Jvb3Q6cGFzc3dvcmRAdGVzdC1lY2hvLTAudGVzdC1lY2hvLWhlYWRsZXNzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWw6MjcwMTcsdGVzdC1lY2hvLTEudGVzdC1lY2hvLWhlYWRsZXNzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWw6MjcwMTcvZWNobz9hdXRoU291cmNlPWFkbWluCg==
+  
+config: 
+  name: echov4config
+  port: "\"3000\""
+  loglevel: "info"
+  persist: "\"true\""
+  dbname: "echo"
+  
+service:
+  name: echoservice
+  port: 80
+  
+clusterIssuer:
+  name: letsencrypt
+  namespace: cert-manager
+  email: "eli.kaplan70@gmail.com"
+  server: 'https://acme-v02.api.letsencrypt.org/directory'
+  keyname: echo-issuer-account-key
+  
+ingress:
+  name: echo-ingress
+#  namespace: default
+  host: kanye.ga
+mongodb:
+  #usePassword: true
+  name: mongodb
+  architecture: "replicaset"
+  mongodbRootPassword: "password"
+  auth:
+    username: "echo"
+    password: "password"
+    database: "echo"
+  service:
+    name: mongodb
+
+
+
+# nginx-ingress-controller:
+
+# cert-manager:
+#   installCRDs: true
